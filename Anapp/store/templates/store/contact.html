@@ -1,0 +1,38 @@
+{%extends 'store/basic.html'%}
+{%block title%}This is awesome{%endblock%}
+{%block body%}
+<form action="/store/contact/" method="post">
+    {% csrf_token %}
+    <div class="container">
+        <h3 class="my-3">Contact us for your Query!</h3>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="name" id="name"class="form-control" name="name"placeholder="Full Name"required>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="tel" class="form-control" id="phone" name="phone"placeholder="(+91)Your Phone Number" required>
+  </div>
+        <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email"placeholder="name@example.com"required>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea name="descht"class="form-control" id="description" rows="3"></textarea>
+      <button id="myButton"type="submit" class="btn btn-primary" >Submit</button>
+  </div>
+        </div>
+</form>
+{%endblock%}
+{%block js%}
+<script>
+
+    document.getElementById("myButton").onclick = function () {
+         alert("I am an alert box!")
+        location.href = "/store";
+    };
+
+</script>
+{%endblock%}

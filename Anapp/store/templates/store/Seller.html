@@ -1,0 +1,44 @@
+{%extends 'store/basic.html'%}
+{%block title%}This is awesome{%endblock%}
+{%block body%}
+<form action="/store/Seller/" method="post">
+    {% csrf_token %}
+    <div class="container">
+        <h3 class="my-3">Sellers Product Form</h3>
+            It will automatically get updated at the frontend.
+
+  <div class="form-group my-4">
+    <label for="name">Product Name</label>
+    <input type="name" id="name"class="form-control" name="prodname"placeholder="Full Name"required>
+  </div>
+  <div class="form-group">
+    <label for="category">category</label>
+    <input  class="form-control" id="category" name="category"placeholder="(+91)Your Phone Number" required>
+  </div>
+        <div class="form-group">
+    <label for="subcategory">Sub category</label>
+    <input  class="form-control" id="subcategory" name="subcategory"placeholder="name@example.com"required>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea name="descht1"class="form-control" id="description" rows="3"></textarea>
+
+  </div>
+        <div class="form-group">
+    <label for="proddate">product date</label>
+    <input  class="form-control" id="proddate" name="proddate"placeholder="name@example.com"required>
+  </div>
+        <div class="form-group">
+    <label for="subcategory">price</label>
+    <input  class="form-control" id="subcategory" name="amount"placeholder="name@example.com"required>
+  </div>
+        <div class="form-group">
+    <label for="subcategory">Image</label>
+    <input  type="file" name="image"class="form-control" required><img src="{{object.image}}">
+  </div>
+
+        <button type="submit" class="btn btn-primary"onclick="alert('submitted successfully')" >Submit</button>
+        </div>
+</form>
+{%endblock%}

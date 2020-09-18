@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css
+" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>{%block title%}{%endblock%}</title>
+    <style>
+     footer.main-footer{
+     background-color:darkgray;
+     padding-top:35px;
+     padding-bottom:35px;
+     }
+        {%block css%}{%endblock%}
+    </style>
+  </head>
+  <body>
+  {%load static%}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <b><a class="navbar-brand" href="/store">E-Bazar</a></b>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/store">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/store/about">About Us <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/store/contact">Contact US <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/store/Seller">Seller Profile <span class="sr-only">(current)</span></a>
+      </li>
+
+      <!--<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+      <!--<li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>-->
+
+    </ul>
+    <!--<form class="form-inline my-2 my-lg-0" action="/store/search" method="get">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"name="query"id="query">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+  </div>
+
+      <button type="button" data-html ="true"id="popcart"  class="btn btn-secondary mx-4" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+
+          <a class="nav-link">Cart(<span id="cart">0</span></a></svg>
+</button>
+      <!-- Button trigger modal -->
+      {% if user.is_authenticated%}
+      <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Welcome {{request.user}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/store/handlelogout">logout</a>
+
+        </div>
+      </li>
+
+    </ul>
+
+      {%else%}
+      <button type="button" class="btn btn-outline-info mr-2" data-toggle="modal" data-target="#exampleModal1">
+  Log in
+</button>
+<button type="button" class="btn btn-outline-info mr-2" data-toggle="modal" data-target="#exampleModal">
+  Sign Up
+</button>
+      {%endif%}
+</nav>
+
+
+<!-- sign up Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title success" id="exampleModalLabel">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/store/signup/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" name="username"id="username" placeholder="select a username">
+  </div>
+          <div class="form-group">
+    <label for="firstname">First Name</label>
+    <input type="text" class="form-control" name="firstname"id="firstname" placeholder="enter your first name">
+  </div>
+          <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" name="lastname"id="lastname" placeholder="last name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" name="email"id="email" placeholder="name@example.com"required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password"id="password" placeholder="Write logical password">
+  </div>
+          <div class="form-group">
+    <label for="password">Confirm your password</label>
+    <input type="password" class="form-control" name="confirmpass"id="confirmpass" placeholder="confirm your password">
+  </div>
+          <button type="submit" class="btn btn-success">Register</button>
+</form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <div>
+    {%for message in messages%}
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+    {%endfor%}
+  </div>
+  <!--Login modal-->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title success" id="exampleModalLabel">Log in</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/store/handlelogin/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+    <label for="namelogin">username</label>
+    <input type="text" class="form-control" name="namelogin"id="namelogin" placeholder="enter your username"required>
+  </div>
+  <div class="form-group">
+    <label for="passwordlogin">Password</label>
+    <input type="password" class="form-control" name="passwordlogin"id="passwordlogin" placeholder="Write logical password">
+  </div>
+          <button type="submit" class="btn btn-outline-success">Log in</button>
+</form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{%block body%}{%endblock%}
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js
+" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js
+" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js
+" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  {%block js%}
+  {%endblock%}
+  </body>
+  <br>
+<footer class="main-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <aside class="footer-widget">
+          <h5>follow us</h5>
+          <ul>
+            <li><a href="#">facebook</a></li>
+            <li><a href="#">youtube</a></li>
+            <li><a href="#">linkedin</a></li>
+            <li><a href="#">sharechat</a></li>
+            <li><a href="#">instagram</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <aside class="footer-widget">
+          <h5>Site map</h5>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Seller Profile</a></li>
+
+          </ul>
+        </aside>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <aside class="footer-widget">
+          <h5>career</h5>
+          <ul>
+            <li><a href="#">Cloud technology</a></li>
+            <li><a href="#">Tech jobs</a></li>
+            <li><a href="#">Managerial</a></li>
+            <li><a href="#">Transportation</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <aside class="footer-widget">
+          <h5>Company Name</h5>
+          <b><p>E-Bazar.pvt.ltd.</p></b>
+          <h6>Contact Us</h6>
+          +(91)9116245345
+          <p>Email : xyz@gmail.com</p>
+
+
+
+        </aside>
+      </div>
+    </div>
+  </div>
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Copyright &copy;All rights reserved.</p>
+      </div>
+    </div>
+  </section>
+</footer>
+</html>
